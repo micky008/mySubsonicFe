@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FolderDAO } from "src/DAO/WS/FolderDAO";
 import { MusiqueDAO } from "./WS/MusiqueDAO";
 import { PlayerDAO } from "./WS/PlayerDAO";
+import { UserDAO } from "./WS/UserDAO";
 
 @Injectable({
     providedIn: 'root',
@@ -15,6 +16,7 @@ export class FactoryDAO {
     private fdao: FolderDAO = null;
     private mdao: MusiqueDAO = null;
     private pdao: PlayerDAO = null;
+    private udao: UserDAO = null;
 
 
     public getFolderDAO(): FolderDAO {
@@ -34,6 +36,12 @@ export class FactoryDAO {
             this.pdao = new PlayerDAO(this.http);
         }
         return this.pdao;
+    }
+    public getUserDAO(): UserDAO {
+        if (this.udao == null) {
+            this.udao = new UserDAO(this.http);
+        }
+        return this.udao;
     }
 
 }
