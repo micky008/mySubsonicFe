@@ -11,15 +11,5 @@ import { Player } from '../entity/Player';
 export class AppComponent {
   title = 'mySubsonicFe';
 
-  constructor(public factoryDAO: FactoryDAO) { }
-
-  toto() {
-    let p: Player = new Player();
-    p.nom = 'totopopo';
-    this.factoryDAO.getPlayerDAO().insertPlayer(p).then((pl: Player) => {
-      console.log(pl);
-    })
-
-  }
-
+  constructor() { }
 }

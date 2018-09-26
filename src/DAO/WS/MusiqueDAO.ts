@@ -24,9 +24,12 @@ export class MusiqueDAO extends AbstractDAO<Musique> {
         return this.http.get<Musique[]>(route).toPromise();
     }
 
-    public getStream(zikId : string): Promise<any> {
-        let route = this.getFullRoute('stream/' + zikId);
-        return this.http.get<any>(route).toPromise();
+    /**
+     * Retourne une url pour le lecteur audio
+     * @param zikId l'UUID de la musique
+     */
+    public getStream(zikId : string): string {
+        return this.getFullRoute('stream/' + zikId);         
     }
 
 }

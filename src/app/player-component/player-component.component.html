@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <td>Cree Player : </td>
+  </tr>
+  <tr>
+    <td><input #noPlayTxt type="text" /><input type="button" value="Crée" (click)="addPlayer(noPlayTxt.value)" /></td>
+  </tr>
+  <tr>
+    <td>Edition : </td>
+  </tr>
+  <tr>
+    <td>
+      <select #selectPlayer *ngIf="players != null; else NoPlayer" (change)="">
+        <option *ngFor="let player of players" value="player">{{player.nom}}</option>
+      </select>
+    </td>
+    <td *ngIf="players != null">
+      <select #selectChoose>
+        <option value="c">Create</option>
+        <option value="d">Delete</option>
+      </select>
+      <input type="button" value="Validation" (click)="choose(selectPlayer.value, selectChoose.value)" />
+    </td>
+  </tr>
+</table>
+
+<ng-template #NoPlayer>
+  Crée un Player...
+</ng-template>

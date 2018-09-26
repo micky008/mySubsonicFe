@@ -1,0 +1,6 @@
+<span *ngIf="img; else noImg">
+  <img [src]="img | HtmlSafe"width="{{width}}" height="{{height}}" />
+</span>
+<ng-template #noImg>
+    <span> &nbsp; </span>
+  </ng-template>

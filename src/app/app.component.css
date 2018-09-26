@@ -1,0 +1,66 @@
+/* GENERAL */
+body {
+    margin: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.container-fluid,
+*[class*="col-"] {
+    padding: 0;
+}
+
+
+
+/* HELPER */
+
+
+
+
+/* LAYOUT */
+.random-box {
+    display: block;
+    min-height: 50px;
+    height: 100%;
+}
+
+.sidebar {
+    height: 80vh;
+    background-color: red; 
+}
+
+.header {
+    display: flex;
+}
+
+.section {
+    height: 60vh;
+    background-color: green;
+}
+
+.footer {
+    height: 20vh;
+    background-color: yellow;
+}
+
+.header .player,
+.header .playlist {
+    display: flex;
+    flex-grow: 1;
+    height: 20vh;
+}
+
+.header .player {
+    background-color: purple;
+}
+
+.header .playlist {
+    background-color: rebeccapurple;
+}
+
+
+
+
+

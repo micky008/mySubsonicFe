@@ -1,0 +1,9 @@
+<table>
+  <tr *ngFor="let folder of folders;index as i;first as isFirst">
+    <td>
+      <span *ngIf="isFirst">{{folder.name[0].toUpperCase()}}<br /></span>
+      <span style="border-top: 3px;" *ngIf="!isFirst && folders[i-1].name[0].toLowerCase() != folder.name[0].toLowerCase()">{{folder.name[0].toUpperCase()}}<br /></span>
+      <span style="cursor: pointer;" [routerLink]="['/musique', folder.id]"  (click)="setLastFolder(folder)" >{{folder.name}}</span>
+    </td>
+  </tr>
+</table>

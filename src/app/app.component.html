@@ -1,20 +1,45 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-<input type="button" (click)="toto()" value="toto go"/>
+<div class="container-fluid">
+    <div class="row">
 
+        <!-- SIDEBAR -->
+        <aside class="col-sm-3">
+            <div class="random-box sidebar">
+                <app-root-folder></app-root-folder>
+            </div>
+        </aside>
+
+        <div class="col-sm-9">
+            <div class="row">
+
+                <!-- HEADER -->
+                <header class="col-sm-12">
+                    <div class="random-box header">
+                        <!-- Playlist -->
+                        <div class="playlist">
+                            <a routerLink="/pmp" routerLinkActive="active">Playlist</a>
+                        </div>
+                        <!-- PLAYER -->
+                        <div class="player">
+                            <a routerLink="/player" routerLinkActive="active">Player</a>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- SECTION -->
+                <section class="col-sm-12">
+                    <div class="random-box section">
+                        <router-outlet></router-outlet>
+                    </div>                   
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <footer class="random-box footer">
+                audio
+            </footer>
+        </div>
+    </div>
+</div>

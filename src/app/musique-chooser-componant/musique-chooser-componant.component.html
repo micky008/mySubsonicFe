@@ -1,0 +1,16 @@
+<table border="1px">
+  <tr *ngFor="let folder of folders">
+    <td [routerLink]="['/musique', folder.id]" style="cursor: pointer;" (click)="setLastFolder(folder)">{{folder.name}}/</td>
+    <td>
+      <app-img-render [img]="folder.imgAlbum"></app-img-render>
+    </td>
+  </tr>
+  <tr *ngFor="let musique of musiques">
+    <td style="cursor: pointer;" (click)="chargeMusique(musique.id)">{{musique.titre}}</td>    
+  </tr>
+  <tr>
+    <td colspan="3">
+      <audio #singlePlayer id="singlePlayer" controls autoplay></audio>
+    </td>
+  </tr>
+</table>
