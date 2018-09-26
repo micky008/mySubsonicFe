@@ -16,33 +16,14 @@
 
 
 /* LAYOUT */
-/* .random-box {
-    display: block;
-    min-height: 50px;
-    height: 100%;
-} */
-
-.sidebar {
-    height: 80vh;
-    background-color: red; 
-}
-
-.header {
+.header,
+.content {
     display: flex;
 }
 
-.section {
-    height: 60vh;
-    background-color: green;
-}
-
-.footer {
-    height: 20vh;
-    background-color: yellow;
-}
-
 .header .player,
-.header .playlist {
+.header .playlist,
+.header .special {
     display: flex;
     flex-grow: 1;
     height: 20vh;
@@ -55,6 +36,38 @@
 .header .playlist {
     background-color: rebeccapurple;
 }
+
+.header .special {
+    background-color: pink;
+}
+
+.sidebar {
+    height: 80vh;
+    background-color: red; 
+}
+
+.section,
+.folder-img {
+    display: flex;
+    flex-grow: 1;
+    height: 60vh;
+}
+
+.section {
+    background-color: green;
+    overflow-y: scroll;
+}
+
+.folder-img {
+    background-color: blue;
+}
+
+.footer {
+    height: 20vh;
+    background-color: yellow;
+}
+
+
 
 
 
