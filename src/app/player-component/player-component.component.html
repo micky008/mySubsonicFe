@@ -10,7 +10,7 @@
   </tr>
   <tr>
     <td>
-      <select #selectPlayer *ngIf="players != null; else NoPlayer" (change)="">
+      <select #selectPlayer *ngIf="players != null; else NoPlayer">
         <option *ngFor="let player of players" value="player">{{player.nom}}</option>
       </select>
     </td>
