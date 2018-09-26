@@ -33,7 +33,7 @@
                 <section class="col-sm-12">
                     <div class="content">
                         <div class="section">
-                            <router-outlet></router-outlet>
+                            <router-outlet (deactivate)="componentRemoved($event)"></router-outlet>
                         </div>
                         <div class="folder-img">
                             <span *ngIf="lastFolder.imgAlbum != null">
