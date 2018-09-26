@@ -1,21 +1,33 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { Folder } from "../entity/Folder";
+import {  of, Observable } from "rxjs";
+
 
 @Injectable({
     providedIn: 'root',
 })
-export class FolderService {
+export class FolderService  {
 
-    private folder: Folder;
 
-    constructor() { }
+    private folderO: Observable<Folder>;
 
-    public getLastFolder(): Folder {
-        return this.folder;
+    private folder : Folder = new Folder();
+
+    constructor() { 
+        this.folderO = of(this.folder);
     }
 
-    public setLastFolder(folder: Folder): void {
-        this.folder = folder;
+
+    public getLastFolder(): Observable<Folder> {
+        return this.folderO;
+    }
+
+
+    public setLastFolder(folder: Folder): void {        
+        this.folder.id = folder.id;        
+        this.folder.idParent = folder.idParent;        
+        this.folder.imgAlbum = folder.imgAlbum;        
+        this.folder.name = folder.name;        
     }
 
 

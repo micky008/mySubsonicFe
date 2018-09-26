@@ -35,7 +35,10 @@ export class MusiqueChooserComponant implements OnInit {
       this.factoryDAO.getMusiqueDAO().getMusiquesByFolder(folder.id).then((ms: Musique[]) => {
         this.musiques = ms;
       });
-      this.parentFolder = this.folderService.getLastFolder();      
+
+      this.folderService.getLastFolder().subscribe( (f : Folder) => {
+        this.parentFolder = f;
+      }); 
     });
 
   }

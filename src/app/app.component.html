@@ -24,7 +24,7 @@
                         </div>
                         <!-- SPECIAL -->
                         <div class="special">
-
+                            <a routerLink="/spacials" routerLinkActive="active">Special</a>
                         </div>
                     </div>
                 </header>
@@ -36,8 +36,10 @@
                             <router-outlet></router-outlet>
                         </div>
                         <div class="folder-img">
-                            
-                        </div>                   
+                            <span *ngIf="lastFolder.imgAlbum != null">
+                                <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300"/>
+                            </span>
+                        </div>
                     </div>
                 </section>
             </div>

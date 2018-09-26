@@ -12,12 +12,14 @@ import { LoginComponent } from './login/login.component';
 import { HtmlSafe } from '../helpers/HtmlSafe';
 import { FolderService } from '../services/folderService';
 import { ImgRenderComponent } from './img-render/img-render.component';
+import { SpecialComponent } from './special/special.component';
 
 
 const appRoutes: Routes = [
-  { path: 'player',               component: PlayerComponent },
+  { path: 'player', component: PlayerComponent },
   { path: 'pmp', component: MusiquePlaceComponant },
-  { path: 'musique/:folderId',    component: MusiqueChooserComponant } 
+  { path: 'musique/:folderId', component: MusiqueChooserComponant },
+  { path: 'specials', component: SpecialComponent }
 ];
 
 
@@ -30,14 +32,15 @@ const appRoutes: Routes = [
     RootFolderComponent,
     LoginComponent,
     HtmlSafe,
-    ImgRenderComponent
+    ImgRenderComponent,
+    SpecialComponent
   ],
   imports: [
-    BrowserModule, 
-    HttpClientModule, 
-    RouterModule.forRoot(appRoutes)    
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [FactoryDAO,FolderService],
+  providers: [FactoryDAO, FolderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
