@@ -1,6 +1,4 @@
 export class Player {
     public nom: string;
-    public id: string;
-
-
+    public id: number;
 }

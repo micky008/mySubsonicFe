@@ -1,12 +1,20 @@
+<table>
+  <tr>
+    <td *ngFor="let b of breadcrum" style="cursor: pointer;"   
+    [routerLink]="['/musique', b.id]" style="cursor: pointer;" (click)="setActualFolderBreadCrum(b)">
+      {{b.name}} /
+    </td>
+  </tr>
+</table>
 <table border="1px">
   <tr *ngFor="let folder of folders">
-    <td [routerLink]="['/musique', folder.id]" style="cursor: pointer;" (click)="setLastFolder(folder)">{{folder.name}}/</td>
+    <td [routerLink]="['/musique', folder.id]" style="cursor: pointer;" (click)="setActualFolder(folder)">{{folder.name}}/</td>
     <td>
       <app-img-render [img]="folder.imgAlbum"></app-img-render>
     </td>
   </tr>
   <tr *ngFor="let musique of musiques">
-    <td style="cursor: pointer;" (click)="chargeMusique(musique.id)">{{musique.titre}}</td>    
+    <td style="cursor: pointer;" (click)="chargeMusique(musique.id)">{{musique.titre}}</td>
   </tr>
   <tr>
     <td colspan="3">

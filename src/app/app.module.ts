@@ -13,6 +13,7 @@ import { HtmlSafe } from '../helpers/HtmlSafe';
 import { FolderService } from '../services/folderService';
 import { ImgRenderComponent } from './img-render/img-render.component';
 import { SpecialComponent } from './special/special.component';
+import { PlayerService } from '../services/playerService';
 
 
 const appRoutes: Routes = [
@@ -40,7 +41,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FactoryDAO, FolderService],
+  providers: [FactoryDAO, FolderService,PlayerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

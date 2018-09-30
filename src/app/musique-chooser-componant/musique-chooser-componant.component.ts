@@ -16,7 +16,8 @@ export class MusiqueChooserComponant implements OnInit {
   folders: Folder[];
   musiques: Musique[];
   parentFolder: Folder;
-  haveFolders: boolean = false;  
+  breadcrum: Folder[];
+
 
   @ViewChild('singlePlayer')
   private playerRef: ElementRef;
@@ -28,19 +29,22 @@ export class MusiqueChooserComponant implements OnInit {
       let folderId: string = routeParams.folderId;
       let folder: Folder = new Folder();
       folder.id = folderId;
+      this.folderService.getLastFolder().subscribe((f: Folder) => {
+        this.parentFolder = f;
+      });
+      this.folderService.getBreadCrum().subscribe((fs: Folder[]) => {
+        this.breadcrum = fs;
+      });
+
+
       this.factoryDAO.getFolderDAO().getChildFolder(folder).then((fs: Folder[]) => {
         this.folders = fs;
-        this.haveFolders = (fs != null && fs.length > 0);
       });
       this.factoryDAO.getMusiqueDAO().getMusiquesByFolder(folder.id).then((ms: Musique[]) => {
         this.musiques = ms;
       });
-
-      this.folderService.getLastFolder().subscribe( (f : Folder) => {
-        this.parentFolder = f;
-      }); 
     });
-
+    
   }
 
   chargeMusique(idMusique: string) {
@@ -49,8 +53,14 @@ export class MusiqueChooserComponant implements OnInit {
     audioPlayer.setAttribute('src', url);
   }
 
-  setLastFolder(folder: Folder) {
-    this.folderService.setLastFolder(folder);
+  setActualFolder(folder: Folder) {
+    this.folderService.addInBreadCrum(folder);
+    this.folderService.setActualFolder(folder);
+  }
+
+  setActualFolderBreadCrum(folder: Folder) {
+    this.folderService.setActualFolder(folder);
+    this.folderService.resetBreadCrum(folder);
   }
 
 }

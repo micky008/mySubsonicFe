@@ -1,4 +1,33 @@
-<div class="container-fluid">
+<div *ngIf="!loginB">
+    <table>
+        <tr>
+            <td>
+                Bienvenue sur mon seurveur de streaming
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input #login type="text" placeholder="login" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input #pwd type="password" placeholder="login" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Login" (click)="loginConnection(login.value, pwd.value)" />
+            </td>
+        </tr>
+        <tr *ngIf="errorLogin">
+            <td>
+                Login ou Mot de passe incorrect
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="loginB" class="container-fluid">
     <div class="row">
 
         <!-- SIDEBAR -->
@@ -37,7 +66,7 @@
                         </div>
                         <div class="folder-img">
                             <span *ngIf="lastFolder.imgAlbum != null">
-                                <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300"/>
+                                <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300" />
                             </span>
                         </div>
                     </div>

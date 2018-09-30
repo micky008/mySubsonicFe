@@ -15,6 +15,7 @@ export class RootFolderComponent implements OnInit {
   constructor(private factoryDAO: FactoryDAO, public folderService: FolderService) { }
 
   ngOnInit() {
+    this.folderService.resetBreadCrum();
     this.factoryDAO.getFolderDAO().getRootFolder().then(
       (fs : Folder[]) => {
         this.folders = fs;
@@ -26,8 +27,10 @@ export class RootFolderComponent implements OnInit {
     );
   }
 
-  public setLastFolder(folder : Folder){
-    this.folderService.setLastFolder(folder);
+  public setActualFolder(folder : Folder){
+    this.folderService.resetBreadCrum();
+    this.folderService.addInBreadCrum(folder);
+    this.folderService.setActualFolder(folder);
   }
 
 }

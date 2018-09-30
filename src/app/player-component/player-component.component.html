@@ -10,16 +10,17 @@
   </tr>
   <tr>
     <td>
-      <select #selectPlayer *ngIf="players != null; else NoPlayer">
-        <option *ngFor="let player of players" value="player">{{player.nom}}</option>
+      <select #selectPlayer *ngIf="players != null; else NoPlayer" (change)="selectPlayerTmp = selectPlayer.value">
+        <option *ngFor="let player of players" value="{{player.id}}">{{player.nom}}</option>
       </select>
+      <input *ngIf='isModif' #textModif type="text" placeholder="nouveau nom player" (change)="textModifTmp = textModif.value">
     </td>
     <td *ngIf="players != null">
-      <select #selectChoose>
-        <option value="c">Create</option>
+      <select #selectChoose (change)="isModif = !isModif">
         <option value="d">Delete</option>
+        <option value="m">Modification</option>        
       </select>
-      <input type="button" value="Validation" (click)="choose(selectPlayer.value, selectChoose.value)" />
+      <input type="button" value="Validation" (click)="choose(selectChoose.value)" />
     </td>
   </tr>
 </table>
