@@ -6,6 +6,7 @@ import { FolderService } from '../services/folderService';
 import { MusiqueChooserComponant } from './musique-chooser-componant/musique-chooser-componant.component';
 import { PlayerService } from '../services/playerService';
 import { User } from '../entity/User';
+import { TransportService } from '../services/transportService';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,23 @@ import { User } from '../entity/User';
 })
 export class AppComponent implements OnInit {
 
-  title = 'mySubsonicFe';
+  
+  text : string;
   lastFolder: Folder = null;
-  private loginB: boolean = false;
+  private loginB: boolean = true;
   private errorLogin: boolean = false;
 
-  constructor(private folderService: FolderService, private playerService: PlayerService, private factoryDAO: FactoryDAO) { }
+  constructor(private folderService: FolderService, 
+    private playerService: PlayerService, 
+    private factoryDAO: FactoryDAO,
+    private transportService : TransportService) { }
 
   ngOnInit() {
     this.folderService.getLastFolder().subscribe((f: Folder) => { this.lastFolder = f; });
     this.playerService.initPlayers();
+    this.transportService.getMessageObservable().subscribe(  (txt : string) => {
+      this.text = txt;
+    });
   }
 
   componentRemoved(event: any) {

@@ -68,6 +68,10 @@
                             <span *ngIf="lastFolder.imgAlbum != null">
                                 <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300" />
                             </span>
+                            <br/>
+                            <span *ngIf="text != null">
+                               {{text}}}
+                            </span>
                         </div>
                     </div>
                 </section>
