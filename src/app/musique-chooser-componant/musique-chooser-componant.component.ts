@@ -7,7 +7,7 @@ import { FolderService } from '../../services/folderService';
 import { Player } from '../../entity/Player';
 import { PlayerService } from '../../services/playerService';
 import { PlayerMusiquePlace } from '../../entity/PlayerMusiquePlace';
-import { PlayerMusiquePlaceService } from '../../services/playerMusiquePlace';
+import { PlayerMusiquePlaceService } from '../../services/playerMusiquePlaceService';
 import { TransportService } from '../../services/transportService';
 @Component({
   selector: 'app-musique-chooser-componant',
@@ -22,10 +22,9 @@ export class MusiqueChooserComponant implements OnInit {
   breadcrum: Folder[];
   players: Player[];
   playerId: number;
-  text : string;
 
-  @ViewChild('singlePlayer')
-  private playerRef: ElementRef;
+  musiqueId : string;
+
   @ViewChild('myTable')
   private myTable: ElementRef;
 
@@ -34,7 +33,7 @@ export class MusiqueChooserComponant implements OnInit {
     private folderService: FolderService,
     private playerService: PlayerService,
     private pmpService: PlayerMusiquePlaceService,
-    private transportService : TransportService) { }
+    private transportService: TransportService) { }
 
   ngOnInit() {
     this.route.params.subscribe(routeParams => {
@@ -55,15 +54,12 @@ export class MusiqueChooserComponant implements OnInit {
       });
       this.playerService.getPlayers().subscribe((ps: Player[]) => {
         this.players = ps;
+        if (ps != null && ps.length > 0) {
+          this.playerId = ps[0].id;
+        }
       });
     });
 
-  }
-
-  chargeMusique(idMusique: string) {
-    let url: string = this.factoryDAO.getMusiqueDAO().getStream(idMusique);
-    let audioPlayer: HTMLAudioElement = this.playerRef.nativeElement;
-    audioPlayer.setAttribute('src', url);
   }
 
   setActualFolder(folder: Folder) {
@@ -93,7 +89,7 @@ export class MusiqueChooserComponant implements OnInit {
 
   partage(): void {
     let list: HTMLInputElement[] = this.getSelectBox();
-    let res: string = "";    
+    let res: string = "";
     list.forEach((chk: HTMLInputElement) => {
       let zikId: string = chk.id.split('_')[1];
       res += this.factoryDAO.getMusiqueDAO().getStream(zikId) + '\n';

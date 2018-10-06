@@ -13,8 +13,10 @@ import { FolderService } from '../services/folderService';
 import { ImgRenderComponent } from './img-render/img-render.component';
 import { SpecialComponent } from './special/special.component';
 import { PlayerService } from '../services/playerService';
-import { PlayerMusiquePlaceService } from '../services/playerMusiquePlace';
+import { PlayerMusiquePlaceService } from '../services/playerMusiquePlaceService';
 import { TransportService } from '../services/transportService';
+import { FooterComponent } from './footer/footer.component';
+import { AudioComponent } from './little/audio/audio.component';
 
 
 const appRoutes: Routes = [
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
     RootFolderComponent,
     HtmlSafe,
     ImgRenderComponent,
-    SpecialComponent
+    SpecialComponent,
+    FooterComponent,
+    AudioComponent
   ],
   imports: [
     BrowserModule,

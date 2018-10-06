@@ -52,15 +52,10 @@ export class FolderService {
         
     }
 
-
-
-
     public setActualFolder(folder: Folder): void {
         this.folder.id = folder.id;
         this.folder.idParent = folder.idParent;
         this.folder.imgAlbum = folder.imgAlbum;
         this.folder.name = folder.name;
     }
-
-
 }

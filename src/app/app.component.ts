@@ -6,7 +6,7 @@ import { FolderService } from '../services/folderService';
 import { MusiqueChooserComponant } from './musique-chooser-componant/musique-chooser-componant.component';
 import { PlayerService } from '../services/playerService';
 import { User } from '../entity/User';
-import { TransportService } from '../services/transportService';
+import { TransportService, MyText } from '../services/transportService';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,7 @@ import { TransportService } from '../services/transportService';
 export class AppComponent implements OnInit {
 
   
-  text : string;
+  text : MyText;
   lastFolder: Folder = null;
   private loginB: boolean = true;
   private errorLogin: boolean = false;
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.folderService.getLastFolder().subscribe((f: Folder) => { this.lastFolder = f; });
     this.playerService.initPlayers();
-    this.transportService.getMessageObservable().subscribe(  (txt : string) => {
+    this.transportService.getMessageObservable().subscribe(  (txt : MyText) => {
       this.text = txt;
     });
   }
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     if (event instanceof MusiqueChooserComponant) {
       this.lastFolder.imgAlbum = null;
     }
+    this.text.text = "";
   }
 
   loginConnection(lg: string, pwd: string) {
@@ -46,7 +47,6 @@ export class AppComponent implements OnInit {
     u.password = pwd;
     this.factoryDAO.getUserDAO().loginUser(u).then(
       (b: boolean) => {
-        debugger;
         this.errorLogin = !b;
         this.loginB = b;
       }

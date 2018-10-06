@@ -15,7 +15,7 @@
   </tr>
   <tr *ngFor="let musique of musiques">
     <td><input type="checkbox" id="chk_{{musique.id}}" class="myChkBx"></td>
-    <td style="cursor: pointer;" (click)="chargeMusique(musique.id)">{{musique.titre}}</td>
+    <td style="cursor: pointer;" (click)="musiqueId = musique.id">{{musique.titre}}</td>
   </tr>
   <tr>
     <td>
@@ -26,16 +26,16 @@
     </td>
     <td>
       <select #playerSelect (change)="playerId = playerSelect.value">
-        <option *ngFor="let player of players" value="{{player.id}}" > {{player.name}}  </option>
+        <option *ngFor="let player of players" value="{{player.id}}" > {{player.nom}}  </option>
       </select>
-    </td>
-    <td>
-      <input type="button" value="Partage" (click)="partage()"/>
-    </td>
+    </td>  
   </tr>
   <tr>
     <td colspan="3">
-      <audio #singlePlayer id="singlePlayer" controls autoplay></audio>
+      <app-audio [zikId]="musiqueId"></app-audio>
+    </td> 
+     <td>
+      <input type="button" value="Partage" (click)="partage()"/>
     </td>
   </tr>
 </table>

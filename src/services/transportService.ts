@@ -4,23 +4,30 @@ import { Observable, of } from "rxjs";
 @Injectable({
     providedIn: 'root',
 })
-export class TransportService implements OnInit {
+export class TransportService {
 
-    private toTransport: string = "";
-    private toTransportO: Observable<string>;
+    private toTransport: MyText;
+    private toTransportO: Observable<MyText>;
 
-    constructor() { }
-
-    ngOnInit(): void {
+    constructor() {
+        this.toTransport = new MyText();
         this.toTransportO = of(this.toTransport);
     }
 
-    public getMessageObservable(): Observable<string> {
+    public getMessageObservable(): Observable<MyText> {
         return this.toTransportO;
     }
 
     public setMessage(newMess: string) {
-        this.toTransport.concat(newMess);
+        this.toTransport.text = newMess;
     }
 
+}
+
+export class MyText {
+    public text: string;
+
+    public bin2Html(): string {
+        return this.text.replace('\n', '<br/>');
+    }
 }

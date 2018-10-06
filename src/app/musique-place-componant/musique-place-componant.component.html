@@ -1,3 +1,30 @@
-<p>
-  musique-place-componant works!
-</p>
+<table style="width: 100%">
+  <tr>
+    <td>
+      <select #playerSelect (change)="changePlayer(playerSelect.value)">
+        <option *ngFor="let player of players" [value]="player.id">{{player.nom}}</option>
+      </select>
+    </td>
+  </tr>
+  <tr *ngFor="let pmp of pmps">
+    <td >
+      <img src="assets/wc.png" style="cursor: pointer;"/>
+    </td>
+    <td  (click)="musiqueId = pmp.musique.id" style="cursor: pointer;border: #ff0000 solid 1px" draggable="true"
+      (dragstart)="drag($event)" (drop)="drop($event)" (dragover)="allowDrop($event)" id="td-{{pmp.musique.id}}">
+      {{pmp.musique.titre}} ({{pmp.musique.artiste}})
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <app-audio [zikId]="musiqueId"></app-audio>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="button" value="Partage All" (click)="partageAll()" />
+    </td>
+  </tr>
+</table>

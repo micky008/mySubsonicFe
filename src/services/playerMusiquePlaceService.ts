@@ -7,14 +7,14 @@ import { Player } from "../entity/Player";
 @Injectable({
     providedIn: 'root',
 })
-export class PlayerMusiquePlaceService implements OnInit {
+export class PlayerMusiquePlaceService {
 
-    constructor(private factoryDAO: FactoryDAO) { }
 
     private playerMusiquePlaces: PlayerMusiquePlace[];
     private playerMusiquePlacesO: Observable<PlayerMusiquePlace[]>;
 
-    ngOnInit(): void {
+
+    constructor(private factoryDAO: FactoryDAO) {
         this.playerMusiquePlaces = new Array<PlayerMusiquePlace>();
         this.playerMusiquePlacesO = of(this.playerMusiquePlaces);
     }
@@ -24,10 +24,16 @@ export class PlayerMusiquePlaceService implements OnInit {
     }
 
     private fillPmps(pmps: PlayerMusiquePlace[]): void {
-        for (let pmp of this.playerMusiquePlaces) {
+        let res: number = this.playerMusiquePlaces.length;
+        for (let i = 0; i < res; i++) {
             this.playerMusiquePlaces.pop();
         }
-        this.playerMusiquePlaces.concat(pmps);
+        if (pmps == null) {
+            return;
+        }
+        for (let pmp of pmps) {
+            this.playerMusiquePlaces.push(pmp);
+        }
     }
 
     public chargeMusiques(player: Player): void {
@@ -40,7 +46,7 @@ export class PlayerMusiquePlaceService implements OnInit {
     }
 
     /**
-     * a appeler apres un drag'n drop de musique danas la playlise.
+     * a appeler apres un drag'n drop de musique danas la playlist.
      * @param playerMusiquePlaces 
      */
     public updateMusique(playerMusiquePlaces: PlayerMusiquePlace[]): void {
@@ -73,7 +79,7 @@ export class PlayerMusiquePlaceService implements OnInit {
                         }
                         no++;
                     }
-                    this.playerMusiquePlaces.splice(no);
+                    this.playerMusiquePlaces.splice(no,1);
                 }
                 let place: number = 1;
                 for (let pmp of this.playerMusiquePlaces) {
@@ -83,15 +89,20 @@ export class PlayerMusiquePlaceService implements OnInit {
         ).catch(e => { alert(e); console.log(e); });
     }
 
+    public deleteMusiqueByPlayer(player : Player) : Promise<PlayerMusiquePlace[]> {
+       return this.factoryDAO.getPlayerDAO().deletePmpsByPlayer(player);
+    }
+
     public addMusique(playerMusiquePlaces: PlayerMusiquePlace[]): void {
         if (playerMusiquePlaces == null || playerMusiquePlaces.length == 0) {
             return;
         }
         let idDebut: number = 1;
-        let lastPmp: PlayerMusiquePlace = null;
+
         if (this.playerMusiquePlaces.length > 0) {
+            let lastPmp: PlayerMusiquePlace = null;
             lastPmp = this.playerMusiquePlaces[this.playerMusiquePlaces.length - 1];
-            idDebut = lastPmp.place;
+            idDebut = lastPmp.place + 1;
         }
 
         for (let pmp of playerMusiquePlaces) {

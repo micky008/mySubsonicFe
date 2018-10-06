@@ -65,13 +65,24 @@
                             <router-outlet (deactivate)="componentRemoved($event)"></router-outlet>
                         </div>
                         <div class="folder-img">
-                            <span *ngIf="lastFolder.imgAlbum != null">
-                                <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300" />
-                            </span>
-                            <br/>
-                            <span *ngIf="text != null">
-                               {{text}}}
-                            </span>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td>
+                                        <span *ngIf="lastFolder.imgAlbum != null">
+                                            <img [src]="lastFolder.imgAlbum | HtmlSafe " width="300" height="300" />
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span *ngIf="text.text != null">      
+                                            <textarea rows="20" cols="40">                                                
+                                                {{text.text}}
+                                            </textarea>                                            
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>                            
                         </div>
                     </div>
                 </section>

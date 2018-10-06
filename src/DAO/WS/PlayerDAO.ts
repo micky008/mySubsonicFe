@@ -50,6 +50,10 @@ export class PlayerDAO extends AbstractDAO<Player>{
         let route = this.getFullRoute('pmp/delete');
         return this.http.post<PlayerMusiquePlace[]>(route, pmps).toPromise();
     }
+    public deletePmpsByPlayer(player: Player): Promise<PlayerMusiquePlace[]> {
+        let route = this.getFullRoute('pmp/deletePlayer');
+        return this.http.post<PlayerMusiquePlace[]>(route, player).toPromise();
+    }
 
 
 
