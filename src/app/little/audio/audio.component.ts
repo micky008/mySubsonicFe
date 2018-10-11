@@ -11,6 +11,7 @@ export class AudioComponent implements OnInit, OnChanges {
 
 
   @Input() zikId: string;
+  @Input() autoPlay : boolean = true;
 
   @ViewChild('singlePlayer')
   private playerRef: ElementRef;

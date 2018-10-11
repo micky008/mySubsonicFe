@@ -8,6 +8,7 @@
 </table>
 <table border="1px" id="myTable" #myTable>
   <tr *ngFor="let folder of folders">
+    <td style="cursor: pointer;" (click)="musiqueId = musique.id">{{musique.titre}}</td>
     <td [routerLink]="['/musique', folder.id]" style="cursor: pointer;" (click)="setActualFolder(folder)">{{folder.name}}/</td>
     <td>
       <app-img-render [img]="folder.imgAlbum"></app-img-render>
@@ -15,7 +16,6 @@
   </tr>
   <tr *ngFor="let musique of musiques">
     <td><input type="checkbox" id="chk_{{musique.id}}" class="myChkBx"></td>
-    <td style="cursor: pointer;" (click)="musiqueId = musique.id">{{musique.titre}}</td>
   </tr>
   <tr>
     <td>

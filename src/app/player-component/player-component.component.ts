@@ -12,8 +12,8 @@ export class PlayerComponent implements OnInit {
 
   players: Player[];
   isModif: boolean = false;
-  selectPlayerTmp : string;
-  textModifTmp : string;
+  selectPlayerTmp: string;
+  textModifTmp: string;
 
   constructor(private playerService: PlayerService) { }
 
@@ -33,8 +33,13 @@ export class PlayerComponent implements OnInit {
   }
 
   choose(md: string) {
-    let p: Player = new Player();
-    p.id = Number.parseInt(this.selectPlayerTmp);
+    let p: Player = null;
+    if (this.selectPlayerTmp == null) {
+      p = this.players[0];
+    } else {
+      p = new Player();
+      p.id = Number.parseInt(this.selectPlayerTmp);
+    }
     if (md == 'd') {
       this.playerService.deletePlayer(p);
     } else {

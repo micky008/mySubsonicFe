@@ -13,18 +13,35 @@ export class PlayerService {
     private players: Player[] = [];
     private playersO: Observable<Player[]>;
 
+    private isInit = false;
+
     constructor(private factoryDAO: FactoryDAO, private pmpService: PlayerMusiquePlaceService) {
         this.initPlayers();
     }
 
-    public initPlayers(): void {
-        this.factoryDAO.getPlayerDAO().getAllPlayers().then((ps: Player[]) => {
-            this.players = ps;
-            this.playersO = of(this.players);
-        });
+    public initPlayers(): Promise<void> {
+        return Promise.resolve(
+            this.factoryDAO.getPlayerDAO().getAllPlayers().then((ps: Player[]) => {
+                this.players = ps;
+                this.playersO = of(this.players);
+                if (ps != null && ps.length > 0) {
+                    this.pmpService.chargeMusiques(ps[0]);
+                }
+                this.isInit = true;
+            })
+        );
     }
 
     public getPlayers(): Observable<Player[]> {
+        debugger;
+        if(!this.isInit){
+            this.initPlayers().then(
+                () => { 
+                    this.isInit = true;
+                    return this.playersO; 
+                }
+            );
+        }
         return this.playersO;
     }
 
@@ -35,17 +52,16 @@ export class PlayerService {
     }
 
     public deletePlayer(p: Player): void {
-        this.pmpService.deleteMusiqueByPlayer(p).then((pmps: PlayerMusiquePlace[]) => {
-            this.factoryDAO.getPlayerDAO().deletePlayer(p).then(() => {
-                let i = 0;
-                for (let pt of this.players) {
-                    if (pt.id == p.id) {
-                        break;
-                    }
-                    i++;
+        this.factoryDAO.getPlayerDAO().deletePlayer(p).then(() => {
+            let i = 0;
+            for (let pt of this.players) {
+                if (pt.id == p.id) {
+                    break;
                 }
-                this.players.splice(i, 1);
-            }).catch(e => { alert(e); console.log(e); });
+                i++;
+            }
+            this.players.splice(i, 1);
+            this.pmpService.cleanPmps();
         }).catch(e => { alert(e); console.log(e); });
     }
 

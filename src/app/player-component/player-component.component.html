@@ -11,7 +11,7 @@
   <tr>
     <td>
       <select #selectPlayer *ngIf="players != null; else NoPlayer" (change)="selectPlayerTmp = selectPlayer.value">
-        <option *ngFor="let player of players" value="{{player.id}}">{{player.nom}}</option>
+        <option *ngFor="let player of players" value="{{player.id}}" >{{player.nom}}</option>
       </select>
       <input *ngIf='isModif' #textModif type="text" placeholder="nouveau nom player" (change)="textModifTmp = textModif.value">
     </td>

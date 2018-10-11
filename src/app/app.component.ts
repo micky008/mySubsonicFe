@@ -7,6 +7,7 @@ import { MusiqueChooserComponant } from './musique-chooser-componant/musique-cho
 import { PlayerService } from '../services/playerService';
 import { User } from '../entity/User';
 import { TransportService, MyText } from '../services/transportService';
+import { PlayerMusiquePlaceService } from '../services/playerMusiquePlaceService';
 
 @Component({
   selector: 'app-root',
@@ -15,21 +16,22 @@ import { TransportService, MyText } from '../services/transportService';
 })
 export class AppComponent implements OnInit {
 
-  
-  text : MyText;
+
+  text: MyText;
   lastFolder: Folder = null;
   private loginB: boolean = true;
   private errorLogin: boolean = false;
 
-  constructor(private folderService: FolderService, 
-    private playerService: PlayerService, 
+  constructor(private folderService: FolderService,
+    private playerService: PlayerService,
     private factoryDAO: FactoryDAO,
-    private transportService : TransportService) { }
+    private transportService: TransportService) {
+  }
 
   ngOnInit() {
-    this.folderService.getLastFolder().subscribe((f: Folder) => { this.lastFolder = f; });
     this.playerService.initPlayers();
-    this.transportService.getMessageObservable().subscribe(  (txt : MyText) => {
+    this.folderService.getLastFolder().subscribe((f: Folder) => { this.lastFolder = f; });
+    this.transportService.getMessageObservable().subscribe((txt: MyText) => {
       this.text = txt;
     });
   }

@@ -8,7 +8,7 @@
   </tr>
   <tr *ngFor="let pmp of pmps">
     <td >
-      <img src="assets/wc.png" style="cursor: pointer;"/>
+      <img src="assets/wc.png" style="cursor: pointer;" (click)="deleteZik(pmp)"/>
     </td>
     <td  (click)="musiqueId = pmp.musique.id" style="cursor: pointer;border: #ff0000 solid 1px" draggable="true"
       (dragstart)="drag($event)" (drop)="drop($event)" (dragover)="allowDrop($event)" id="td-{{pmp.musique.id}}">

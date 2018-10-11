@@ -91,4 +91,11 @@ export class MusiquePlaceComponant implements OnInit {
     ev.preventDefault();
   }
 
+
+  deleteZik(pmp: PlayerMusiquePlace) {
+    let pmpa = new Array();
+    pmpa.push(pmp);
+    this.pmpService.deleteMusique(pmpa);
+  }
+
 }

@@ -1,3 +1,17 @@
-<p>
-  footer works!
-</p>
+<table style="width: 100%">
+  <tr>
+    <td>
+      <select #selectPlayerId (change)="selectPlayer(selectPlayerId.value)">
+        <option *ngFor="let player of players" [value]="player.id">{{player.nom}}</option>
+      </select>
+    </td>
+    <td>
+        <select #selectMusiqueId (change)="selectMusique(selectMusiqueId.value)">
+            <option *ngFor="let pmp of pmps" [value]="pmp.musique.id">{{pmp.musique.titre}}({{pmp.musique.artiste}})</option>
+          </select>
+    </td>
+    <td>
+      <app-audio [zikId]="musiqueId" [autoPlay]="false"></app-audio>
+    </td>
+  </tr>
+</table>
