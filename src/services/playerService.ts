@@ -33,7 +33,6 @@ export class PlayerService {
     }
 
     public getPlayers(): Observable<Player[]> {
-        debugger;
         if(!this.isInit){
             this.initPlayers().then(
                 () => { 

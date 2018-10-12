@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  hostname: "http://localhost/router.php/"
+  hostname: "http://micky.ovh/router.php/9998/"
 };
 
 /*
